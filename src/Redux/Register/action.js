@@ -4,6 +4,7 @@ export const REGISTER_ERROR = "registerError";
 
 export const registerUserSuccess = (payload) => ({
      type : REGISTER_SUCCESS,
+     payload
 })
 
 export const registerUserLoading = () => ({
@@ -18,15 +19,13 @@ export const getRegister = (payload) =>
 async(dispatch) => {
       try {  
              dispatch(registerUserLoading())
-       let res  =   await fetch("https://masai-api-mocker.herokuapp.com/auth/register" , {
-            method : "POST",
-             mode : "no-cors",
-            body : JSON.stringify(payload),
-            headers : {
-                  "Content-Type" : "application/json",
-                  'Access-Control-Allow-Origin':'*',
-            }
-          });
+       let res  =   await fetch("https://masai-api-mocker.herokuapp.com/auth/register",{
+              method : "POST",
+              body : JSON.stringify(payload),
+              headers : {
+                 "Content-Type": "application/json"
+              }
+       })
           let data = await res.json();
          dispatch(registerUserSuccess(data));
            console.log(data)

@@ -16,7 +16,7 @@ export const registerReducer = (store = {user : {} , loading : false , error : f
                }
            case REGISTER_ERROR:
                 return {
-                    ...store , user : {},
+                    ...store , user :{},
                       loading : false,
                       error : true
                 }

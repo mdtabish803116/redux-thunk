@@ -1,7 +1,11 @@
 import {Flex, Box } from '@chakra-ui/react';
 import {Link} from "react-router-dom";
+import {useSelector , useDispatch} from "react-redux";
+import {logOut} from "./../Redux/Login/action"
 
 export const Navbar = () => {
+       const dispatch = useDispatch();
+       const {auth , loginUser} = useSelector((state) => state.loginUser)
       return(
         <Flex className = "flex"  
               height = "60px" 
@@ -15,10 +19,10 @@ export const Navbar = () => {
                      <Link to = "/">Home</Link>
               </Box>
               <Box>
-                     <Link to = "/register">Register</Link>
+                     <Link to = "/register">{auth?(`Token Id : ${loginUser.token}`):("Register")}</Link>
               </Box>
               <Box>
-                     <Link to = "/login">Login</Link>
+                     <Link to = "/login" onClick = {() => dispatch(logOut())}>{auth?("LogOut"):("Login")}</Link>
               </Box>
       </Flex>
       )
